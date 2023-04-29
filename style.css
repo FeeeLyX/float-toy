@@ -3,15 +3,15 @@
   
   --bg: white;
   --text: #313131;
-  --slider-left: 16px;
+  --slider-left: 0.8vw;
   --slider-color: #F2C429;
   --slider-bg: #3977B2;
   --circle1: #F2C429;
   --circle2: #689DC9;
   --circle3: #5A92C1;
   --circle4: #4F86BF;
-  --x-shift: 0px;
-  --y-shift: 0px;
+  --x-shift: 0;
+  --y-shift: 0;
   --link-color: #689DC9;
   --sgn: #ABC6CF;
   --exp: #D2EAB1;
@@ -30,15 +30,15 @@
 #color-mode:checked ~ * {
   --bg: #313131;
   --text: #969DB0;
-  --slider-left: 111px;
+  --slider-left: 5.55vw;
   --slider-color: #545363;
   --slider-bg: #1F1E30;
   --circle1: #969DB0;
   --circle2: #545363;
   --circle3: #414352;
   --circle4: #2F3140;
-  --x-shift:  1.5em;
-  --y-shift: -0.75em;
+  --x-shift:   1vw;
+  --y-shift: -0.5vw;
   --link-color: #689DC9;
   --sgn: #BBF;
   --exp: #BFB;
@@ -58,7 +58,7 @@
 }
 
 body {
-  margin: 0px;
+  margin: 0;
   font: 14px/20px consolas;
   cursor: default;
 }
@@ -195,15 +195,15 @@ span.fraction { background: #FDD; }
   .toggle-switch {
     position: relative;
     top: 0px;
-    width: 200px;
+    width: 10vw;
   }
   
   label {
     position: absolute;
-    width: 100%;
-    height: 100px;
+    width: 10vw;
+    height: 5vw;
     background-color: var(--slider-bg);
-    border-radius: 50px;
+    border-radius: 2.5vw;
     cursor: pointer;
     overflow: hidden;
     transition: var(--duration);
@@ -218,8 +218,8 @@ span.fraction { background: #FDD; }
     position: relative;
     width: 100%;
     height: 100%;
-    border-radius: 50px;
-    z-index: 2;
+    border-radius: 2.5vw;
+    /* z-index: 2; */
     box-shadow:         inset 0px 0px 10px 3px #0000007f;
     -webkit-box-shadow: inset 0px 0px 10px 3px #0000007f;
     -moz-box-shadow:    inset 0px 0px 10px 3px #0000007f;
@@ -234,7 +234,7 @@ span.fraction { background: #FDD; }
     position: absolute;
     width: 100%;
     height: 100%;
-    border-radius: 50px;
+    border-radius: 2.5vw;
     transition: var(--duration);
     /* z-index: -1; */
   }
@@ -242,16 +242,16 @@ span.fraction { background: #FDD; }
   .slider::before {
     content: "";
     position: absolute;
-    top:    13px;
+    top:   0.65vw;
     left:   var(--slider-left);
-    width:  37.5%;
-    height: 75%;
+    width:  3.75vw;
+    height: 3.75vw;
     border-radius: 50%;
-    box-shadow: inset var(--x-shift) var(--y-shift) 0px    0px var(--circle1),
+    box-shadow: inset var(--x-shift) var(--y-shift) 0px   0px var(--circle1),
                                 /* -3.px             2px 2px    0px var(--circle1), */
-                                0px             0px 0px 1.75em var(--circle2),
-                                0px             0px 0px  3.5em var(--circle3),
-                                0px             0px 0px    5em var(--circle4);
+                                0px             0px 0px 1.5vw var(--circle2),
+                                0px             0px 0px   3vw var(--circle3),
+                                0px             0px 0px   4vw var(--circle4);
     
     background-color: var(--slider-color);
     transition: var(--duration);
