@@ -58,7 +58,7 @@
 
 body {
   margin: 0;
-  font: 14px/20px consolas, Ubuntu Mono, monospace, sans-serif;
+  font: 14px/20px consolas, "Ubuntu mono", monospace, sans-serif;
   cursor: default;
 }
 
