@@ -13,12 +13,12 @@
   --x-shift: 0;
   --y-shift: 0;
   --link-color: #689DC9;
-  --sgn: #ABC6CF;
-  --exp: #D2EAB1;
-  --frc: #ffcdd2;
-  --sgn-hover: #99D;
-  --exp-hover: #9D9;
-  --frc-hover: #D99;
+  --sgn: #ABDEE6;
+  --exp: #CCE2CB;
+  --frc: #FFC5BF;
+  --sgn-hover: #54d2d4;
+  --exp-hover: #78ce9d;
+  --frc-hover: #ff998e;
 }
 
 * {
@@ -39,12 +39,12 @@
   --x-shift:   1vw;
   --y-shift: -0.5vw;
   --link-color: #689DC9;
-  --sgn: #BBF;
+  /* --sgn: #BBF;
   --exp: #BFB;
   --frc: #FBB;
   --sgn-hover: #99D;
   --exp-hover: #9D9;
-  --frc-hover: #D99;
+  --frc-hover: #D99; */
 }
 
 .color-scheme-wrapper {
@@ -92,6 +92,10 @@ td {
 td.sign     {background: var(--sgn); }
 td.exponent {background: var(--exp); }
 td.fraction {background: var(--frc); }
+
+span.sign     {background: var(--sgn); box-shadow: inset 0px 0px 5px 1px #000;}
+span.exponent {background: var(--exp); box-shadow: inset 0px 0px 5px 1px #000;}
+span.fraction {background: var(--frc); box-shadow: inset 0px 0px 5px 1px #000;}
 
 td.sign.hover     { background: var(--sgn-hover); }
 td.exponent.hover { background: var(--exp-hover); }
@@ -217,10 +221,6 @@ td.dark.nibble {
   transition: var(--duration);
   color: var(--text);
 }
-
-span.sign     { background: #DDF; }
-span.exponent { background: #DFD; }
-span.fraction { background: #FDD; }
 
 .flex-container {
     display: flex;
