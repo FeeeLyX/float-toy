@@ -1621,7 +1621,7 @@ var float16 = (function (exports) {
   /**
    * returns an unsigned 16-bit float at the specified byte offset from the start of the DataView.
    * @param {DataView} dataView
-   * @param {nunmber} byteOffset
+   * @param {number} byteOffset
    * @param {*} opts
    */
 

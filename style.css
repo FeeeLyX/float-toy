@@ -83,20 +83,22 @@ table {
 
 td {
   font: inherit;
+  font-weight: bold;
   padding: 0;
   text-align: center;
 }
 
-td.sign     { background: var(--sgn); }
-td.exponent { background: var(--exp); }
-td.fraction { background: var(--frc); }
+td.sign     {background: var(--sgn); }
+td.exponent {background: var(--exp); }
+td.fraction {background: var(--frc); }
 
 td.sign.hover     { background: var(--sgn-hover); }
 td.exponent.hover { background: var(--exp-hover); }
 td.fraction.hover { background: var(--frc-hover); }
 
 .input td {
-  border: 1px solid #000;
+  border: 2px solid var(--bg);
+  transition: var(--duration);
   padding: 5px 2px;
   font-size: 14px;
 }
@@ -135,6 +137,43 @@ td.fraction.hover { background: var(--frc-hover); }
   height: 26px;
   line-height: 26px;
   box-sizing: content-box;
+}
+
+td.sign, td.exponent, td.fraction {
+  position: relative;
+  font-size: 1rem;
+  font-weight: bold;
+  line-height: 1;
+  padding: 0.25rem 0.25rem;
+  border-radius: 0.5rem;
+}
+
+td.sign::before, td.exponent::before, td.fraction::before {
+  content: '';
+  display: block;
+  background: #313131;
+  opacity: 0.20;
+  height: 1px;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  box-sizing: border-box;
+}
+
+td.sign::after, td.exponent::after, td.fraction::after {
+  content: '';
+  display: block;
+  background: #313131;
+  opacity: 0.1;
+  height: 50%;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  border-bottom-left-radius:  0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  box-sizing: border-box;
 }
 
 .output:hover, .output:focus {
