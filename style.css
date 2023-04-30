@@ -23,7 +23,7 @@
 
 * {
   animation-timing-function: ease-in-out;
-  -webkit-timing-function: ease-in;
+  -webkit-timing-function: ease-in-out;
 }
 
 #color-mode:checked ~ * {
@@ -48,7 +48,7 @@
 }
 
 .color-scheme-wrapper {
-  min-height: 100vh;
+  min-height: 89.5vh;
   max-width: 100vw;
   padding: 50px;
   background: var(--bg);
@@ -75,7 +75,8 @@ h2 {
 }
 
 table {
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 1px;
   font-size: 20px;
   line-height: 14px;
   width: 100%;
@@ -97,7 +98,6 @@ td.exponent.hover { background: var(--exp-hover); }
 td.fraction.hover { background: var(--frc-hover); }
 
 .input td {
-  border: 2px solid var(--bg);
   transition: var(--duration);
   padding: 5px 2px;
   font-size: 14px;
@@ -145,7 +145,7 @@ td.sign, td.exponent, td.fraction {
   font-weight: bold;
   line-height: 1;
   padding: 0.25rem 0.25rem;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
 }
 
 td.sign::before, td.exponent::before, td.fraction::before {
@@ -171,8 +171,8 @@ td.sign::after, td.exponent::after, td.fraction::after {
   position: absolute;
   top: 50%;
   left: 0;
-  border-bottom-left-radius:  0.5rem;
-  border-bottom-right-radius: 0.5rem;
+  border-bottom-left-radius:  0.25rem;
+  border-bottom-right-radius: 0.25rem;
   box-sizing: border-box;
 }
 
