@@ -243,9 +243,9 @@ const {Float16Array} = float16;
 
       help.innerHTML =
         '<span class="sign">' + (sign ? -1 : 1) + '</span>' +
-        '<span class="x">&nbsp;&nbsp;&times;&nbsp;&nbsp;</span>' +
+        '<span class="x">&nbsp;&times;&nbsp;</span>' +
         '<span class="exponent">2<sup>' + exponent + '</sup></span>' +
-        '<span class="x">&nbsp;&nbsp;&times;&nbsp;&nbsp;</span>' +
+        '<span class="x">&nbsp;&times;&nbsp;</span>' +
         '<span class="fraction">' + reduceNumber(fraction) + '</span>';
     }
 
