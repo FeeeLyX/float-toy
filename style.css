@@ -39,12 +39,6 @@
   --x-shift:   1vw;
   --y-shift: -0.5vw;
   --link-color: #689DC9;
-  /* --sgn: #BBF;
-  --exp: #BFB;
-  --frc: #FBB;
-  --sgn-hover: #99D;
-  --exp-hover: #9D9;
-  --frc-hover: #D99; */
 }
 
 .color-scheme-wrapper {
@@ -89,17 +83,41 @@ td {
   text-align: center;
 }
 
-td.sign     {background: var(--sgn); }
-td.exponent {background: var(--exp); }
-td.fraction {background: var(--frc); }
+div.sign     {background: var(--sgn); }
+div.exponent {background: var(--exp); }
+div.fraction {background: var(--frc); }
 
-span.sign     {background: var(--sgn); box-shadow: inset 0px 0px 5px 1px #000;}
-span.exponent {background: var(--exp); box-shadow: inset 0px 0px 5px 1px #000;}
-span.fraction {background: var(--frc); box-shadow: inset 0px 0px 5px 1px #000;}
+div.sign     div.flip-up   {background: var(--sgn); }
+div.exponent div.flip-up   {background: var(--exp); }
+div.fraction div.flip-up   {background: var(--frc); }
 
-td.sign.hover     { background: var(--sgn-hover); }
-td.exponent.hover { background: var(--exp-hover); }
-td.fraction.hover { background: var(--frc-hover); }
+div.sign     div.flip-down {background: var(--sgn); }
+div.exponent div.flip-down {background: var(--exp); }
+div.fraction div.flip-down {background: var(--frc); }
+
+div.sign     div.old-digit {background: var(--sgn); }
+div.exponent div.old-digit {background: var(--exp); }
+div.fraction div.old-digit {background: var(--frc); }
+
+span.sign     {background: var(--sgn); box-shadow: inset 0px 0px 4px 0px #000;}
+span.exponent {background: var(--exp); box-shadow: inset 0px 0px 4px 0px #000;}
+span.fraction {background: var(--frc); box-shadow: inset 0px 0px 4px 0px #000;}
+
+div.sign.hover     { background: var(--sgn-hover); }
+div.exponent.hover { background: var(--exp-hover); }
+div.fraction.hover { background: var(--frc-hover); }
+
+div.sign.hover     div.flip-up   { background: var(--sgn-hover); }
+div.exponent.hover div.flip-up   { background: var(--exp-hover); }
+div.fraction.hover div.flip-up   { background: var(--frc-hover); }
+
+div.sign.hover     div.flip-down { background: var(--sgn-hover); }
+div.exponent.hover div.flip-down { background: var(--exp-hover); }
+div.fraction.hover div.flip-down { background: var(--frc-hover); }
+
+div.sign.hover     div.old-digit { background: var(--sgn-hover); }
+div.exponent.hover div.old-digit { background: var(--exp-hover); }
+div.fraction.hover div.old-digit { background: var(--frc-hover); }
 
 .input td {
   transition: var(--duration);
@@ -143,19 +161,69 @@ td.fraction.hover { background: var(--frc-hover); }
   box-sizing: content-box;
 }
 
-td.sign, td.exponent, td.fraction {
+div.flip-up, div.flip-down {
+  overflow: hidden;
+  opacity: 0;
+  content: '';
+  width: 100%;
+  height: calc(50% - 0.35rem);
+  left: 0;
+  transform-style: preserve-3d;
+}
+
+div.flip-up {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  padding-top: 0.35rem;
+  transform-origin: 100% 100%;
+}
+
+div.flip-down, div.old-digit {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  border-bottom-left-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+  padding-bottom: 0.35rem;
+  transform-origin: 100% 0%;
+}
+
+div.old-digit {
+  overflow: hidden;
+  opacity: 0;
+  height: calc(50% - 0.35rem);
+}
+
+div.digit {
+  display: block;
+  position: relative;
+  color: #000;
+  padding-top:    0.1rem;
+  padding-bottom: 0.1rem;
+  height: 100%;
+  width: 100%;
+}
+
+div.sign, div.exponent, div.fraction {
+  margin: 0.1rem;
+  padding: 0.25rem;
   box-shadow: 0px 2px 3px 0px #000;
   position: relative;
   font-size: 1rem;
   font-weight: bold;
   line-height: 1;
-  padding: 0.25rem 0.25rem;
   border-radius: 0.25rem;
 }
 
-td.sign::before, td.exponent::before, td.fraction::before {
+div.sign::before, div.exponent::before, div.fraction::before, div.flip-up::before, div.flip-down::before, div.old-digit::before {
   content: '';
-  display: block;
   background: #313131;
   opacity: 0.20;
   height: 1px;
@@ -166,9 +234,16 @@ td.sign::before, td.exponent::before, td.fraction::before {
   box-sizing: border-box;
 }
 
-td.sign::after, td.exponent::after, td.fraction::after {
+div.flip-up::before {
+  top: 100%;
+}
+
+div.flip-down::before, div.old-digit::before {
+  top: 0;
+}
+
+div.sign::after, div.exponent::after, div.fraction::after {
   content: '';
-  display: block;
   background: #313131;
   opacity: 0.1;
   height: 50%;
@@ -204,16 +279,19 @@ td.sign::after, td.exponent::after, td.fraction::after {
   margin: -3px;
 }
 
-td.nibble {
-  font-size: 10px;
-  line-height: 6px;
+
+div.nibble {
+  font-size: 12px;
+  width: 100%;
+  padding-top:    0.1rem;
+  padding-bottom: 0.1rem;
   border: none;
   color: var(--text);
   transition: var(--duration);
   background: var(--circle2);
 }
 
-td.dark.nibble {
+div.dark.nibble {
   background: var(--slider-bg);
 }
 

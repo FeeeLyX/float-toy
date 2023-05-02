@@ -61,22 +61,22 @@ const {Float16Array} = float16;
     }
 
     // Populate HTML
-    var html = '<table>';
+    
     // The bit numbers
-    html += '<tr>';
+    var html = '<div style="display: flex">';
     for (var i = 0; i < bytes.length; i++) {
       for (var j = 0; j < 8; j++) {
         var index = (bytes.length - i) * 8 - j;
         if (j > 3) {
-          html += '<td class="nibble">' + index + '</td>'
+          html += '<div class="nibble">' + index + '</div>'
         } else {
-          html += '<td class="dark nibble">' + index + '</td>'
+          html += '<div class="dark nibble">' + index + '</div>'
         }
       }
     }
-    html += '</tr>';
+    html += '</div>';
     // The bits
-    html += '<tr>';
+    html += '<div style="display: flex">';
     for (var i = 0; i < bytes.length; i++) {
       for (var j = 0; j < 8; j++) {
         var index = i * 8 + j;
@@ -84,10 +84,10 @@ const {Float16Array} = float16;
           index === 0 ? 'sign' :
             index < 1 + exponentBits ? 'exponent' :
               'fraction';
-        html += '<td data-index="' + index + '" class="' + className + '">0</td>';
+        html += '<div data-index="' + index + '" class="' + className + '"></div>';
       }
     }
-    html += '</tr></table>';
+    html += '</div>';
     input.innerHTML = html;
 
     // Grab elements
@@ -190,10 +190,79 @@ const {Float16Array} = float16;
       }
     };
 
+    const flippingup = [
+      { transform: "rotate(0) scale(1)", opacity: 1 },
+      { transform: "rotateX(90deg)", opacity: 1 },
+      { transform: "rotateX(90deg)", opacity: 1 },
+    ];
+
+    const flippingdown = [
+      { transform: "rotateX(-90deg)", opacity: 1 },
+      { transform: "rotateX(-90deg)", opacity: 1 },
+      { transform: "rotate(0) scale(1)", opacity: 1 },
+    ];
+
+    const olddigitanim = [
+      { opacity: 1 },
+      { opacity: 1 },
+    ];
+
+    const timing = {
+      duration: 750,
+      iterations: 1,
+    }
+
     // Update loop
     function render() {
       for (var i = 0; i < bytes.length * 8; i++) {
-        elements[i].textContent = ((bytes[bytes.length - (i >> 3) - 1] >> (7 - (i & 7))) & 1);
+        var digit;
+        var up;
+        var down;
+        var old;
+        if (elements[i].children.length == 0) {
+          digit = document.createElement('div');
+          digit.textContent = '0'
+          digit.setAttribute("class", "digit");
+          elements[i].appendChild(digit);
+
+          up = document.createElement('div');
+          up.textContent = '0'
+          up.setAttribute("class", "flip-up");
+          elements[i].appendChild(up);
+
+          old = document.createElement('div');
+          old.setAttribute("class", "old-digit");
+          var old_p = document.createElement('p');
+          old_p.textContent = '0'
+          old_p.setAttribute("style", "position: relative; top: -100%; margin: 0;");
+          old.appendChild(old_p);
+          elements[i].appendChild(old);
+
+          down = document.createElement('div');
+          down.setAttribute("class", "flip-down");
+          var down_p = document.createElement('p');
+          down_p.textContent = '0'
+          down_p.setAttribute("style", "position: relative; top: -100%; margin: 0;");
+          down.appendChild(down_p);
+          elements[i].appendChild(down);
+        }
+        else {
+          digit = elements[i].children[0];
+          up    = elements[i].children[1];
+          old   = elements[i].children[2];
+          down  = elements[i].children[3];
+        }
+        var newvalue = ((bytes[bytes.length - (i >> 3) - 1] >> (7 - (i & 7))) & 1);
+        var oldvalue = elements[i].children[0].textContent;
+        if (newvalue != oldvalue) {
+          elements[i].children[0].textContent = newvalue;
+          elements[i].children[1].textContent = oldvalue;
+          elements[i].children[2].children[0].textContent = oldvalue;
+          elements[i].children[3].children[0].textContent = newvalue;
+          elements[i].children[1].animate(flippingup,   timing);
+          elements[i].children[2].animate(olddigitanim, timing);
+          elements[i].children[3].animate(flippingdown, timing);
+        }
       }
 
       // Figure out exponent
@@ -242,7 +311,7 @@ const {Float16Array} = float16;
       }
 
       help.innerHTML =
-        '<span class="sign">' + (sign ? -1 : 1) + '</span>' +
+        '<span class="sign">' + (sign ? '-1' : '&nbsp;1') + '</span>' +
         '<span class="x">&nbsp;&times;&nbsp;</span>' +
         '<span class="exponent">2<sup>' + exponent + '</sup></span>' +
         '<span class="x">&nbsp;&times;&nbsp;</span>' +
